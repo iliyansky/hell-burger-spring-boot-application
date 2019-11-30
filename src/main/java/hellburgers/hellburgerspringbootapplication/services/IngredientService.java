@@ -22,15 +22,15 @@ public class IngredientService {
         return ingredientRepository.findAll();
     }
 
-    public void edit(String name, Ingredient ingredient){
-        ingredientRepository.getByName(name).setName(ingredient.getName());
-        ingredientRepository.getByName(name).setPrice(ingredient.getPrice());
+    public void edit(Long id, Ingredient ingredient){
+        ingredientRepository.getOne(id).setName(ingredient.getName());
+        ingredientRepository.getOne(id).setPrice(ingredient.getPrice());
         ingredientRepository.flush();
     }
 
     @Transactional
-    public void delete(String name){
-        ingredientRepository.deleteByName(name);
+    public void delete(Long id){
+        ingredientRepository.deleteById(id);
         ingredientRepository.flush();
     }
 }

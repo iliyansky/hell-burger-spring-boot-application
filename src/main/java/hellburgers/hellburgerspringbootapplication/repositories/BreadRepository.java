@@ -7,8 +7,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BreadRepository extends JpaRepository<Bread,Long> {
-    Long removeByName(String name);
-    Bread getByName(String name);
-
-
 }

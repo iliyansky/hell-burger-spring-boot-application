@@ -13,19 +13,16 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.sql.DataSource;
 
 @SpringBootApplication
+
 public class HellBurgerSpringBootApplication extends SpringBootServletInitializer {
 
 
 
     public static void main(String[] args) {
         SpringApplication.run(HellBurgerSpringBootApplication.class, args);
-
-
     }
 
     @Override

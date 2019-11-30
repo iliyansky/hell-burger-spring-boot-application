@@ -6,7 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MeatRepository extends JpaRepository<Meat,Long> {
-    void deleteByName(String name);
-
-    Meat getByName(String name);
 }

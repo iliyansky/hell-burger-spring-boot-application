@@ -22,15 +22,15 @@ public class MeatServices {
         return meatRepository.findAll();
     }
 
-    public void edit(String name, Meat meat){
-        meatRepository.getByName(name).setName(meat.getName());
-        meatRepository.getByName(name).setPrice(meat.getPrice());
+    public void edit(Long id, Meat meat){
+        meatRepository.getOne(id).setName(meat.getName());
+        meatRepository.getOne(id).setPrice(meat.getPrice());
         meatRepository.flush();
     }
 
     @Transactional
-    public void delete(String name){
-        meatRepository.deleteByName(name);
+    public void delete(Long id){
+        meatRepository.deleteById(id);
         meatRepository.flush();
     }
 }

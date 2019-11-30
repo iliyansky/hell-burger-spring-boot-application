@@ -36,12 +36,12 @@ public class InsideController {
 
     @RequestMapping("edit")
     public String edit(){
-        return "Choose what you want to edit with /.../{name}";
+        return "Choose what you want to edit with /.../{id}";
     }
 
     @RequestMapping(value = "/delete")
     public String delete(){
-        return "Chose what you want to delete with /delete/.../{name}";
+        return "Chose what you want to delete with /delete/.../{id}";
     }
 
     @RequestMapping("/add/bread")
@@ -74,34 +74,33 @@ public class InsideController {
         return ingredientService.getIngredients();
     }
 
-    @RequestMapping(value = "/edit/bread/{name}")
-    public void editBreadByName(@PathVariable("name") String name, @RequestBody Bread bread){
-        breadService.edit(name,bread);
+    @RequestMapping(value = "/edit/bread/{id}")
+    public void editBreadById(@PathVariable("id") Long id, @RequestBody Bread bread){
+        breadService.edit(id,bread);
     }
 
-    @RequestMapping(value = "/edit/meat/{name}")
-    public void editMeatByName(@PathVariable("name") String name, @RequestBody Meat meat){
-        meatServices.edit(name,meat);
+    @RequestMapping(value = "/edit/meat/{id}")
+    public void editMeatById(@PathVariable("id") Long id, @RequestBody Meat meat){
+        meatServices.edit(id,meat);
     }
 
-    @RequestMapping(value = "/edit/ingredient/{name}")
-    public void editIngredientByName(@PathVariable("name")String name, @RequestBody Ingredient ingredient){
-        ingredientService.edit(name,ingredient);
+    @RequestMapping(value = "/edit/ingredient/{id}")
+    public void editIngredientById(@PathVariable("id")Long id, @RequestBody Ingredient ingredient){
+        ingredientService.edit(id,ingredient);
     }
 
-
-    @RequestMapping(value = "/delete/bread/{name}")
-    public void deleteBreadByName(@PathVariable("name") String name){
-        breadService.delete(name);
+    @RequestMapping(value = "/delete/bread/{id}")
+    public void deleteBreadById(@PathVariable("id") Long id){
+        breadService.delete(id);
     }
 
-    @RequestMapping(value = "/delete/meat/{name}")
-    public void deleteMeatByName(@PathVariable("name") String name){
-        meatServices.delete(name);
+    @RequestMapping(value = "/delete/meat/{id}")
+    public void deleteMeatById(@PathVariable("id") Long id){
+        meatServices.delete(id);
     }
 
-    @RequestMapping(value = "/delete/ingredient/{name}")
-    public void deleteIngredientByName(@PathVariable("name") String name){
-        ingredientService.delete(name);
+    @RequestMapping(value = "/delete/ingredient/{id}")
+    public void deleteIngredientById(@PathVariable("id") Long id){
+        ingredientService.delete(id);
     }
 }

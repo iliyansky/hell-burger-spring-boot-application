@@ -16,10 +16,6 @@ public class Burger {
     @Column
     private double price;
 
-    @PersistenceContext
-    EntityManager entityManager;
-
-
     @OneToMany(targetEntity = Ingredient.class, mappedBy = "burger", fetch = FetchType.LAZY)
     private List<Ingredient> ingredients;
 

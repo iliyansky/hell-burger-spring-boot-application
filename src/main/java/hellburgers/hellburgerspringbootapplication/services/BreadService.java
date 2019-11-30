@@ -23,14 +23,14 @@ public class BreadService {
     }
 
     @Transactional
-    public void delete(String name){
-        breadRepository.removeByName(name);
+    public void delete(Long id){
+        breadRepository.deleteById(id);
         //breadRepository.flush();
     }
 
-    public void edit(String name,Bread bread){
-        breadRepository.getByName(name).setName(bread.getName());
-        breadRepository.getByName(name).setPrice(bread.getPrice());
+    public void edit(Long id,Bread bread){
+        breadRepository.getOne(id).setName(bread.getName());
+        breadRepository.getOne(id).setPrice(bread.getPrice());
         breadRepository.flush();
     }
 }

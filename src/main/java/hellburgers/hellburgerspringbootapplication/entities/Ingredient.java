@@ -47,4 +47,8 @@ public class Ingredient {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public Burger getBurger() {
+        return burger;
+    }
 }

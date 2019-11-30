@@ -13,23 +13,15 @@ import javax.persistence.EntityManager;
 public class BurgerService {
 
     @Autowired
-    private BurgerRepository burgerRepository;
-
-    @Autowired
     BreadRepository breadRepository;
 
-    @RequestMapping("/create")
-    public void createBurgerName(){
-        burgerRepository.save(new Burger());
-    }
+//    public void createBurgerName(){
+//        burgerRepository.save(new Burger());
+//    }
 
-    @RequestMapping("/choseBread")
-    public void addBread(String name){
-        Burger burger = new Burger();
-
-        burger.getBreads().add(breadRepository.getByName(name));
-
-
-    }
-
+//    @RequestMapping("/choseBread")
+//    public void addBread(Long id){
+//        Burger burger = new Burger();
+//
+//        // burger.getBreads().add(breadRepository.getOne(id));
 }

@@ -1,9 +1,6 @@
 package hellburgers.hellburgerspringbootapplication.entities;
 
-import org.hibernate.annotations.Generated;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Bread {
