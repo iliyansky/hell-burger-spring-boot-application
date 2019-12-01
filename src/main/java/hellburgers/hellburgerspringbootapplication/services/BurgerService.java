@@ -1,27 +1,63 @@
 package hellburgers.hellburgerspringbootapplication.services;
 
 import hellburgers.hellburgerspringbootapplication.entities.Burger;
-import hellburgers.hellburgerspringbootapplication.repositories.BreadRepository;
-import hellburgers.hellburgerspringbootapplication.repositories.BurgerRepository;
+import hellburgers.hellburgerspringbootapplication.entities.CurrentBurger;
+import hellburgers.hellburgerspringbootapplication.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.persistence.EntityManager;
 
 @Service
 public class BurgerService {
 
     @Autowired
-    BreadRepository breadRepository;
+    private BurgerRepository burgerRepository;
 
-//    public void createBurgerName(){
-//        burgerRepository.save(new Burger());
-//    }
+    @Autowired
+    private BreadRepository breadRepository;
 
-//    @RequestMapping("/choseBread")
-//    public void addBread(Long id){
-//        Burger burger = new Burger();
-//
-//        // burger.getBreads().add(breadRepository.getOne(id));
+    @Autowired
+    private MeatRepository meatRepository;
+
+    @Autowired
+    private CurrentBurgerRepository currentBurgerRepository;
+
+    @Autowired
+    private IngredientRepository ingredientRepository;
+
+    private CurrentBurger currentBurger = new CurrentBurger();
+
+    public void createBurger(){
+        Burger burger = new Burger();
+        burger.setName("Burger");
+        this.burgerRepository.save(burger);
+        this.currentBurger.setCurrentBurger(burger.getId());
+        this.currentBurgerRepository.save(currentBurger);
+
+    }
+    public void addBreadToTheBurger(long id){
+        Burger burger = this.burgerRepository.getOne(currentBurger.getCurrentBurger());
+        burger.addBread(this.breadRepository.getOne(id));
+        burger.setName("Bread");
+        this.burgerRepository.save(burger);
+    }
+
+    public void addMeatToTheBurger(long id){
+        Burger burger = this.burgerRepository.getOne(currentBurger.getCurrentBurger());
+        burger.addMeat(this.meatRepository.getOne(id));
+        burger.setName("Meat");
+        this.burgerRepository.save(burger);
+    }
+
+    public void addIngredientToTheBurger(long id){
+        Burger burger = this.burgerRepository.getOne(currentBurger.getCurrentBurger());
+        burger.addIngredients(this.ingredientRepository.getOne(id));
+        burger.setName("Ingredient");
+        this.burgerRepository.save(burger);
+    }
+
+    public void finish(){
+        Burger burger = this.burgerRepository.getOne(currentBurger.getCurrentBurger());
+        burger.setName("Finish");
+        this.currentBurgerRepository.deleteAll();
+    }
 }

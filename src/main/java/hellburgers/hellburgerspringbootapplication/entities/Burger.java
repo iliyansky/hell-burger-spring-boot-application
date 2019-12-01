@@ -1,5 +1,6 @@
 package hellburgers.hellburgerspringbootapplication.entities;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -7,7 +8,7 @@ import java.util.List;
 public class Burger {
 
     @Id
-    @GeneratedValue(strategy =GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
@@ -19,14 +20,18 @@ public class Burger {
     @OneToMany(targetEntity = Ingredient.class, mappedBy = "burger", fetch = FetchType.LAZY)
     private List<Ingredient> ingredients;
 
-    @OneToMany(targetEntity = Ingredient.class, mappedBy = "burger", fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Meat.class, mappedBy = "burger", fetch = FetchType.LAZY)
     private List<Meat> meats;
 
-    @OneToMany(targetEntity = Ingredient.class, mappedBy = "burger", fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Bread.class, mappedBy = "burger", fetch = FetchType.LAZY)
     private List<Bread> breads;
 
     public Burger() {
+        this.breads = new ArrayList<>();
+        this.meats = new ArrayList<>();
+        this.ingredients = new ArrayList<>();
     }
+
 
     public Burger(String name) {
         this.name = name;
@@ -78,5 +83,17 @@ public class Burger {
 
     public void setBreads(List<Bread> breads) {
         this.breads = breads;
+    }
+
+    public void addBread(Bread bread){
+        this.breads.add(bread);
+    }
+
+    public void addMeat(Meat meat){
+        this.meats.add(meat);
+    }
+
+    public void addIngredients(Ingredient ingredient){
+        this.ingredients.add(ingredient);
     }
 }
