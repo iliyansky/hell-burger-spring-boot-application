@@ -13,7 +13,6 @@ public class Ingredient {
     private double price;
 
     @ManyToOne
-    @JoinColumn(name = "burger_id")
     private Burger burger;
 
     public Ingredient() {

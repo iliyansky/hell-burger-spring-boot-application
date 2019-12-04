@@ -15,7 +15,6 @@ public class Meat {
     private double price;
 
     @ManyToOne
-    @JoinColumn(name = "burger_id")
     private Burger burger;
 
     public Meat() {

@@ -1,11 +1,5 @@
 package hellburgers.hellburgerspringbootapplication;
 
-import hellburgers.hellburgerspringbootapplication.entities.Burger;
-import hellburgers.hellburgerspringbootapplication.entities.Meat;
-import hellburgers.hellburgerspringbootapplication.repositories.BurgerRepository;
-import hellburgers.hellburgerspringbootapplication.repositories.MeatRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;

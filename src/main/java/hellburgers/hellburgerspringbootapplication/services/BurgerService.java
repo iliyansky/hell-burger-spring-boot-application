@@ -6,6 +6,8 @@ import hellburgers.hellburgerspringbootapplication.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BurgerService {
 
@@ -34,10 +36,12 @@ public class BurgerService {
         this.currentBurgerRepository.save(currentBurger);
 
     }
+
     public void addBreadToTheBurger(long id){
         Burger burger = this.burgerRepository.getOne(currentBurger.getCurrentBurger());
         burger.addBread(this.breadRepository.getOne(id));
         burger.setName("Bread");
+        burger.setPrice(burger.getPrice() + this.breadRepository.getOne(id).getPrice());
         this.burgerRepository.save(burger);
     }
 
@@ -45,6 +49,7 @@ public class BurgerService {
         Burger burger = this.burgerRepository.getOne(currentBurger.getCurrentBurger());
         burger.addMeat(this.meatRepository.getOne(id));
         burger.setName("Meat");
+        burger.setPrice(burger.getPrice() + meatRepository.getOne(id).getPrice());
         this.burgerRepository.save(burger);
     }
 
@@ -52,12 +57,17 @@ public class BurgerService {
         Burger burger = this.burgerRepository.getOne(currentBurger.getCurrentBurger());
         burger.addIngredients(this.ingredientRepository.getOne(id));
         burger.setName("Ingredient");
+        burger.setPrice(burger.getPrice() + this.ingredientRepository.getOne(id).getPrice());
         this.burgerRepository.save(burger);
     }
 
-    public void finish(){
+    public void addName(String name){
         Burger burger = this.burgerRepository.getOne(currentBurger.getCurrentBurger());
-        burger.setName("Finish");
+        burger.setName(name);
         this.currentBurgerRepository.deleteAll();
+    }
+
+    public List<Burger> displayBurger(){
+        return burgerRepository.findAll();
     }
 }
