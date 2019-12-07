@@ -1,5 +1,7 @@
 package hellburgers.hellburgerspringbootapplication.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +15,8 @@ public class Ingredient {
     private double price;
 
     @ManyToOne
+    @JoinColumn(name = "burger_id")
+    @JsonIgnore
     private Burger burger;
 
     public Ingredient() {

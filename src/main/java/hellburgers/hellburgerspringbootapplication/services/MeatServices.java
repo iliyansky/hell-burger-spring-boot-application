@@ -11,7 +11,7 @@ import java.util.List;
 public class MeatServices {
 
     @Autowired
-    MeatRepository meatRepository;
+    private MeatRepository meatRepository;
 
     public void addMeat(Meat meat){
         meatRepository.save(meat);

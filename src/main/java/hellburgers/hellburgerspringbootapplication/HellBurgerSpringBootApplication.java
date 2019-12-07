@@ -13,8 +13,6 @@ import javax.sql.DataSource;
 
 public class HellBurgerSpringBootApplication extends SpringBootServletInitializer {
 
-
-
     public static void main(String[] args) {
         SpringApplication.run(HellBurgerSpringBootApplication.class, args);
     }

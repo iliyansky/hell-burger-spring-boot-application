@@ -1,6 +1,9 @@
 package hellburgers.hellburgerspringbootapplication.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 public class Bread {
@@ -14,6 +17,8 @@ public class Bread {
     private double price;
 
     @ManyToOne
+    @JoinColumn(name = "burger_id")
+    @JsonIgnore
     private Burger burger;
 
     public Bread() {

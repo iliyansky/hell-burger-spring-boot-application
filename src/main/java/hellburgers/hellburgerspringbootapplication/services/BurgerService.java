@@ -1,7 +1,6 @@
 package hellburgers.hellburgerspringbootapplication.services;
 
-import hellburgers.hellburgerspringbootapplication.entities.Burger;
-import hellburgers.hellburgerspringbootapplication.entities.CurrentBurger;
+import hellburgers.hellburgerspringbootapplication.entities.*;
 import hellburgers.hellburgerspringbootapplication.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,48 +25,72 @@ public class BurgerService {
     @Autowired
     private IngredientRepository ingredientRepository;
 
-    private CurrentBurger currentBurger = new CurrentBurger();
-
-    public void createBurger(){
-        Burger burger = new Burger();
-        burger.setName("Burger");
-        this.burgerRepository.save(burger);
-        this.currentBurger.setCurrentBurger(burger.getId());
-        this.currentBurgerRepository.save(currentBurger);
-
+    public Burger createBurger(Burger burger) {
+        burger.setPrice(calculateThePrice(burger));
+        return burgerRepository.save(burger);
     }
 
-    public void addBreadToTheBurger(long id){
-        Burger burger = this.burgerRepository.getOne(currentBurger.getCurrentBurger());
-        burger.addBread(this.breadRepository.getOne(id));
-        burger.setName("Bread");
-        burger.setPrice(burger.getPrice() + this.breadRepository.getOne(id).getPrice());
-        this.burgerRepository.save(burger);
-    }
-
-    public void addMeatToTheBurger(long id){
-        Burger burger = this.burgerRepository.getOne(currentBurger.getCurrentBurger());
-        burger.addMeat(this.meatRepository.getOne(id));
-        burger.setName("Meat");
-        burger.setPrice(burger.getPrice() + meatRepository.getOne(id).getPrice());
-        this.burgerRepository.save(burger);
-    }
-
-    public void addIngredientToTheBurger(long id){
-        Burger burger = this.burgerRepository.getOne(currentBurger.getCurrentBurger());
-        burger.addIngredients(this.ingredientRepository.getOne(id));
-        burger.setName("Ingredient");
-        burger.setPrice(burger.getPrice() + this.ingredientRepository.getOne(id).getPrice());
-        this.burgerRepository.save(burger);
-    }
-
-    public void addName(String name){
-        Burger burger = this.burgerRepository.getOne(currentBurger.getCurrentBurger());
-        burger.setName(name);
-        this.currentBurgerRepository.deleteAll();
+    public String displayOneMeat(long id){
+        return this.burgerRepository.getOne(id).getMeats().get(0).getName();
     }
 
     public List<Burger> displayBurger(){
         return burgerRepository.findAll();
     }
+
+    private Double calculateThePrice(Burger burger){
+        double price = 0;
+        price += burger.getBreads().stream().mapToDouble(Bread::getPrice).sum();
+        price += burger.getMeats().stream().mapToDouble(Meat::getPrice).sum();
+        price += burger.getIngredients().stream().mapToDouble(Ingredient::getPrice).sum();
+        return price;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    //    public void addName(String name){
+    //        this.currentBurgerRepository.deleteAll();
+    //        burger.setName(name);
+    //        Burger burger = this.burgerRepository.getOne(currentBurger.getCurrentBurger());
+    //
+    //    }
+    //    public void addIngredientToTheBurger(long id){
+    //        this.burgerRepository.save(burger);
+    //        burger.setPrice(burger.getPrice() + this.ingredientRepository.getOne(id).getPrice());
+    //        burger.setName("Ingredient");
+    //        burger.addIngredients(this.ingredientRepository.getOne(id));
+    //        Burger burger = this.burgerRepository.getOne(currentBurger.getCurrentBurger());
+    //
+    //    }
+    //    public void addMeatToTheBurger(long id){
+    //        this.burgerRepository.save(burger);
+    //        burger.setPrice(burger.getPrice() + meatRepository.getOne(id).getPrice());
+    //        burger.setName("Meat");
+    //        burger.addMeat(this.meatRepository.getOne(id));
+    //        Burger burger = this.burgerRepository.getOne(currentBurger.getCurrentBurger());
+    //
+    //    }
+    //    public void addBreadToTheBurger(long id){
+    //        this.burgerRepository.save(burger);
+    //        burger.setPrice(burger.getPrice() + this.breadRepository.getOne(id).getPrice());
+    //        burger.setName("Bread");
+    //        burger.addBread(this.breadRepository.getOne(id));
+    //        Burger burger = this.burgerRepository.getOne(currentBurger.getCurrentBurger());
+    //
+    //    }
+    //    public void createBurger(){
+    //        this.currentBurgerRepository.save(currentBurger);
+    //        this.currentBurger.setCurrentBurger(burger.getId());
+    //        this.burgerRepository.save(burger);
+    //        burger.setName("Burger");
+    //        Burger burger = new Burger();
+    //    }
 }

@@ -26,12 +26,12 @@ public class Burger {
     @OneToMany(targetEntity = Bread.class, mappedBy = "burger", fetch = FetchType.LAZY)
     private List<Bread> breads;
 
+
     public Burger() {
         this.breads = new ArrayList<>();
         this.meats = new ArrayList<>();
         this.ingredients = new ArrayList<>();
     }
-
 
     public Burger(String name) {
         this.name = name;
