@@ -34,6 +34,10 @@ public class BurgerService {
         return price;
     }
 
+    public Burger review(Burger burger){
+        burger.setPrice(calculateThePrice(burger));
+        return burger;
+    }
     public Burger createBurger(Burger burger) {
         burger.setPrice(calculateThePrice(burger));
         return burgerRepository.save(burger);

@@ -29,17 +29,17 @@ public class InsideController {
     private BurgerService burgerService;
 
 
-    @RequestMapping("/get")
+    @RequestMapping(value = "/get")
     public String chooseWhatToGet(){
         return "Choose what to get with /...";
     }
 
-    @RequestMapping("/add")
+    @RequestMapping(value = "/add")
     public String chooseWhatToAdd(){
         return "Choose what to add with /... !";
     }
 
-    @RequestMapping("edit")
+    @RequestMapping(value = "edit")
     public String edit(){
         return "Choose what you want to edit with /.../{id}";
     }
@@ -49,42 +49,42 @@ public class InsideController {
         return "Chose what you want to delete with /delete/.../{id}";
     }
 
-    @RequestMapping("/add/bread")
+    @RequestMapping(value = "/add/bread")
     public void addBread(@RequestBody Bread bread){
         breadService.addBread(bread);
     }
 
-    @RequestMapping("/add/meat")
+    @RequestMapping(value = "/add/meat")
     public void addMeat(@RequestBody Meat meat){
         meatServices.addMeat(meat);
     }
 
-    @RequestMapping("/add/ingredient")
+    @RequestMapping(value = "/add/ingredient")
     public void addIngredient(@RequestBody Ingredient ingredient){
         ingredientService.addIngredient(ingredient);
     }
 
-    @RequestMapping("/add/sauce")
+    @RequestMapping(value = "/add/sauce")
     public void addSauce(@RequestBody Sauce sauce){
         sauceService.addSauce(sauce);
     }
 
-    @RequestMapping("/get/breads")
+    @RequestMapping(value = "/get/breads")
     public List<Bread> getBreads(){
        return breadService.getBreads();
     }
 
-    @RequestMapping("/get/meats")
+    @RequestMapping(value = "/get/meats")
     public List<Meat> getMeats(){
         return meatServices.getMeats();
     }
 
-    @RequestMapping("/get/ingredients")
+    @RequestMapping(value = "/get/ingredients")
     public List<Ingredient> getIngredients(){
         return ingredientService.getIngredients();
     }
 
-    @RequestMapping("/get/sauce")
+    @RequestMapping(value = "/get/sauce")
     public List<Sauce> getSauces(){
         return sauceService.getAll();
     }

@@ -35,7 +35,6 @@ public class Burger {
     @JoinTable
     private Set<Sauce> sauces;
 
-
     public Burger() {
         this.ingredients = new ArrayList<>();
         this.meats = new HashSet<>();
