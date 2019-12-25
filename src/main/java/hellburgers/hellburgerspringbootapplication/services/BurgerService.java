@@ -20,30 +20,31 @@ public class BurgerService {
     private MeatRepository meatRepository;
 
     @Autowired
-    private CurrentBurgerRepository currentBurgerRepository;
+    private IngredientRepository ingredientRepository;
 
     @Autowired
-    private IngredientRepository ingredientRepository;
+    private SauceRepository sauceRepository;
+
+    private double calculateThePrice(Burger burger) {
+        double price = 0;
+        price += burger.getBreads().stream().mapToDouble(Bread::getPrice).sum();
+        price += burger.getMeats().stream().mapToDouble(Meat::getPrice).sum();
+        price += burger.getIngredients().stream().mapToDouble(Ingredient::getPrice).sum();
+        price += burger.getSauces().stream().mapToDouble(Sauce::getPrice).sum();
+        return price;
+    }
 
     public Burger createBurger(Burger burger) {
         burger.setPrice(calculateThePrice(burger));
         return burgerRepository.save(burger);
     }
 
-    public String displayOneMeat(long id){
-        return this.burgerRepository.getOne(id).getMeats().get(0).getName();
-    }
-
     public List<Burger> displayBurger(){
         return burgerRepository.findAll();
     }
 
-    private Double calculateThePrice(Burger burger){
-        double price = 0;
-        price += burger.getBreads().stream().mapToDouble(Bread::getPrice).sum();
-        price += burger.getMeats().stream().mapToDouble(Meat::getPrice).sum();
-        price += burger.getIngredients().stream().mapToDouble(Ingredient::getPrice).sum();
-        return price;
+    public void deleteBurger(long id){
+        burgerRepository.deleteById(id);
     }
 
 

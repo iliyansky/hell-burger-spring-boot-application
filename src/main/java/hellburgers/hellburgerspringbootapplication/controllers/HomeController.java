@@ -19,16 +19,6 @@ public class HomeController {
         return burgerService.displayBurger();
     }
 
-    @RequestMapping("/display/meat/{id}")
-    public String displayOneMeat(@PathVariable("id") Long id){
-       return burgerService.displayOneMeat(id);
-    }
-
-    @GetMapping("/get")
-    public Burger getBurger(){
-       return this.burgerService.displayBurger().get(0);
-    }
-
     @RequestMapping("/create")
     public Burger createBurger(@RequestBody Burger burger){
         return this.burgerService.createBurger(burger);
