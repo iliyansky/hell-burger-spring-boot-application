@@ -1,6 +1,9 @@
 package hellburgers.hellburgerspringbootapplication.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Bread {
@@ -13,9 +16,9 @@ public class Bread {
 
     private double price;
 
-    @ManyToOne
-    @JoinColumn(name = "burger_id")
-    private Burger burger;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Burger> burgers;
 
     public Bread() {
     }
@@ -49,7 +52,11 @@ public class Bread {
         this.price = price;
     }
 
-    public Burger getBurger() {
-        return burger;
+    public Set<Burger> getBurgers() {
+        return burgers;
+    }
+
+    public void setBurgers(Set<Burger> burgers) {
+        this.burgers = burgers;
     }
 }

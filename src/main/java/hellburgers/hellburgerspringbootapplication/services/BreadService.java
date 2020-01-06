@@ -25,7 +25,6 @@ public class BreadService {
     @Transactional
     public void delete(Long id){
         breadRepository.deleteById(id);
-        //breadRepository.flush();
     }
 
     public void edit(Long id,Bread bread){

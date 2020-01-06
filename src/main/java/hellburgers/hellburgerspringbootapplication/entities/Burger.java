@@ -1,13 +1,16 @@
 package hellburgers.hellburgerspringbootapplication.entities;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table
 public class Burger {
 
     @Id
-    @GeneratedValue(strategy =GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
@@ -16,16 +19,27 @@ public class Burger {
     @Column
     private double price;
 
-    @OneToMany(targetEntity = Ingredient.class, mappedBy = "burger", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable
     private List<Ingredient> ingredients;
 
-    @OneToMany(targetEntity = Ingredient.class, mappedBy = "burger", fetch = FetchType.LAZY)
-    private List<Meat> meats;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable
+    private Set<Meat> meats;
 
-    @OneToMany(targetEntity = Ingredient.class, mappedBy = "burger", fetch = FetchType.LAZY)
-    private List<Bread> breads;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable
+    private Set<Bread> breads;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable
+    private Set<Sauce> sauces;
 
     public Burger() {
+        this.ingredients = new ArrayList<>();
+        this.meats = new HashSet<>();
+        this.breads = new HashSet<>();
+        this.sauces = new HashSet<>();
     }
 
     public Burger(String name) {
@@ -64,19 +78,39 @@ public class Burger {
         this.ingredients = ingredients;
     }
 
-    public List<Meat> getMeats() {
+    public Set<Meat> getMeats() {
         return meats;
     }
 
-    public void setMeats(List<Meat> meats) {
+    public void setMeats(Set<Meat> meats) {
         this.meats = meats;
     }
 
-    public List<Bread> getBreads() {
+    public Set<Bread> getBreads() {
         return breads;
     }
 
-    public void setBreads(List<Bread> breads) {
+    public void setBreads(Set<Bread> breads) {
         this.breads = breads;
+    }
+
+    public void addBread(Bread bread){
+        this.breads.add(bread);
+    }
+
+    public void addMeat(Meat meat){
+        this.meats.add(meat);
+    }
+
+    public void addIngredients(Ingredient ingredient){
+        this.ingredients.add(ingredient);
+    }
+
+    public Set<Sauce> getSauces() {
+        return sauces;
+    }
+
+    public void setSauces(Set<Sauce> sauces) {
+        this.sauces = sauces;
     }
 }

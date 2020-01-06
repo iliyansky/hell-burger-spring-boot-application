@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Ingredient {
+public class Sauce {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -19,10 +19,10 @@ public class Ingredient {
     @JsonIgnore
     private Set<Burger> burgers;
 
-    public Ingredient() {
+    public Sauce() {
     }
 
-    public Ingredient(String name, double price) {
+    public Sauce(String name, double price) {
         this.name = name;
         this.price = price;
     }

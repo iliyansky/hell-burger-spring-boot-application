@@ -1,9 +1,9 @@
 package hellburgers.hellburgerspringbootapplication.repositories;
 
-import hellburgers.hellburgerspringbootapplication.entities.Bread;
+import hellburgers.hellburgerspringbootapplication.entities.Sauce;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BreadRepository extends JpaRepository<Bread,Long> {
+public interface SauceRepository extends JpaRepository<Sauce,Long> {
 }

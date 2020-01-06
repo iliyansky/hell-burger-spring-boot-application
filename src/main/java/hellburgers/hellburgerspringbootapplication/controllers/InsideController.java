@@ -3,9 +3,8 @@ package hellburgers.hellburgerspringbootapplication.controllers;
 import hellburgers.hellburgerspringbootapplication.entities.Bread;
 import hellburgers.hellburgerspringbootapplication.entities.Ingredient;
 import hellburgers.hellburgerspringbootapplication.entities.Meat;
-import hellburgers.hellburgerspringbootapplication.services.BreadService;
-import hellburgers.hellburgerspringbootapplication.services.IngredientService;
-import hellburgers.hellburgerspringbootapplication.services.MeatServices;
+import hellburgers.hellburgerspringbootapplication.entities.Sauce;
+import hellburgers.hellburgerspringbootapplication.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,18 +22,24 @@ public class InsideController {
     @Autowired
     private IngredientService ingredientService;
 
+    @Autowired
+    private SauceService sauceService;
 
-    @RequestMapping("/get")
+    @Autowired
+    private BurgerService burgerService;
+
+
+    @RequestMapping(value = "/get")
     public String chooseWhatToGet(){
         return "Choose what to get with /...";
     }
 
-    @RequestMapping("/add")
+    @RequestMapping(value = "/add")
     public String chooseWhatToAdd(){
         return "Choose what to add with /... !";
     }
 
-    @RequestMapping("edit")
+    @RequestMapping(value = "edit")
     public String edit(){
         return "Choose what you want to edit with /.../{id}";
     }
@@ -44,34 +49,44 @@ public class InsideController {
         return "Chose what you want to delete with /delete/.../{id}";
     }
 
-    @RequestMapping("/add/bread")
+    @RequestMapping(value = "/add/bread")
     public void addBread(@RequestBody Bread bread){
         breadService.addBread(bread);
     }
 
-    @RequestMapping("/add/meat")
+    @RequestMapping(value = "/add/meat")
     public void addMeat(@RequestBody Meat meat){
         meatServices.addMeat(meat);
     }
 
-    @RequestMapping("/add/ingredient")
+    @RequestMapping(value = "/add/ingredient")
     public void addIngredient(@RequestBody Ingredient ingredient){
         ingredientService.addIngredient(ingredient);
     }
 
-    @RequestMapping("/get/breads")
+    @RequestMapping(value = "/add/sauce")
+    public void addSauce(@RequestBody Sauce sauce){
+        sauceService.addSauce(sauce);
+    }
+
+    @RequestMapping(value = "/get/breads")
     public List<Bread> getBreads(){
        return breadService.getBreads();
     }
 
-    @RequestMapping("/get/meats")
+    @RequestMapping(value = "/get/meats")
     public List<Meat> getMeats(){
         return meatServices.getMeats();
     }
 
-    @RequestMapping("/get/ingredients")
+    @RequestMapping(value = "/get/ingredients")
     public List<Ingredient> getIngredients(){
         return ingredientService.getIngredients();
+    }
+
+    @RequestMapping(value = "/get/sauce")
+    public List<Sauce> getSauces(){
+        return sauceService.getAll();
     }
 
     @RequestMapping(value = "/edit/bread/{id}")
@@ -89,6 +104,11 @@ public class InsideController {
         ingredientService.edit(id,ingredient);
     }
 
+    @RequestMapping(value = "/edit/sauce/{id}")
+    public void editSauceById(@PathVariable("id")Long id, @RequestBody Sauce sauce){
+        sauceService.edit(id,sauce);
+    }
+
     @RequestMapping(value = "/delete/bread/{id}")
     public void deleteBreadById(@PathVariable("id") Long id){
         breadService.delete(id);
@@ -102,5 +122,15 @@ public class InsideController {
     @RequestMapping(value = "/delete/ingredient/{id}")
     public void deleteIngredientById(@PathVariable("id") Long id){
         ingredientService.delete(id);
+    }
+
+    @RequestMapping(value = "/delete/sauce/{id}")
+    public void deleteSauceById(@PathVariable("id") Long id){
+        sauceService.delete(id);
+    }
+
+    @RequestMapping(value = "/delete/{id}")
+    public void deleteBurgerById(@PathVariable("id") Long id){
+        this.burgerService.deleteBurger(id);
     }
 }
