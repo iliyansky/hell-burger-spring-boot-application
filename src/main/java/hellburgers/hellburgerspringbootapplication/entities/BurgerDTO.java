@@ -1,7 +1,7 @@
 package hellburgers.hellburgerspringbootapplication.entities;
 
 import java.util.Set;
-
+// Future implementation to work with DTO object for more security
 public class BurgerDTO {
 
     private String name;
