@@ -1,9 +1,6 @@
 package hellburgers.hellburgerspringbootapplication.controllers;
 
-import hellburgers.hellburgerspringbootapplication.entities.Bread;
-import hellburgers.hellburgerspringbootapplication.entities.Ingredient;
-import hellburgers.hellburgerspringbootapplication.entities.Meat;
-import hellburgers.hellburgerspringbootapplication.entities.Sauce;
+import hellburgers.hellburgerspringbootapplication.entities.*;
 import hellburgers.hellburgerspringbootapplication.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -77,27 +74,33 @@ public class InsideController {
     }
 
     // Endpoint to get all breads in database
-    @RequestMapping(value = "/get/breads")
+    @GetMapping(value = "/get/breads")
     public List<Bread> getBreads(){
        return breadService.getBreads();
     }
 
     // Endpoint to get all meats in database
-    @RequestMapping(value = "/get/meats")
+    @GetMapping(value = "/get/meats")
     public List<Meat> getMeats(){
         return meatServices.getMeats();
     }
 
     // Endpoint to get all ingredients in database
-    @RequestMapping(value = "/get/ingredients")
+    @GetMapping(value = "/get/ingredients")
     public List<Ingredient> getIngredients(){
         return ingredientService.getIngredients();
     }
 
     // Endpoint to get all sauce in database
-    @RequestMapping(value = "/get/sauce")
+    @GetMapping(value = "/get/sauce")
     public List<Sauce> getSauces(){
         return sauceService.getAll();
+    }
+
+    // Endpoint to get burger by name
+    @GetMapping(value = "/get/burger/{name}")
+    public Burger getBurgerByName(@PathVariable("name") String name){
+       return burgerService.getBurgerByName(name);
     }
 
     //Endpoint to edit bread by Id

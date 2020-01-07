@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BurgerRepository extends JpaRepository<Burger,Long> {
+    Burger findByName(String name);
 }

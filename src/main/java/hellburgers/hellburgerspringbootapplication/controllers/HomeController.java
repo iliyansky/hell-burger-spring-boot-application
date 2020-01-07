@@ -13,6 +13,7 @@ public class HomeController {
     @Autowired
     private BurgerService burgerService;
 
+
     // Display all burgers in database
     @RequestMapping("/display")
     public List<Burger> displayBurger(){

@@ -43,6 +43,10 @@ public class BurgerService {
         return burgerRepository.save(burger);
     }
 
+    public Burger getBurgerByName(String name){
+       return burgerRepository.findByName(name);
+    }
+
     public List<Burger> displayBurger(){
         return burgerRepository.findAll();
     }
