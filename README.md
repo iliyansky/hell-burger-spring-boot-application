@@ -1,22 +1,48 @@
 # hell-burger-spring-boot-application
 
-I've created a new Maven project with Spring Initializr. First made the configuration, added needed dependencies and connected it with the database.
-I've created those packages and filled them: 
-   - controllers
-   - entities
-   - repositories
-   - services
+Application for creating burger with 5 simple steps;
 
-The main conception of the project is to create a burger with 5 simple steps:
 
     1. Choose bread
     2. Choose meat
     3. Choose ingredients
     4. Choose sauce
     5. Give a name 
-    
-In the future when my friend is done with the frontend, everything will happen with 1 click each.
+            
+How to use it:
 
+       // To see how the application works you must have: XAMPP, etc. and Postman, etc.
+            
+        1. Run XAMPP and start MySql
+        2. Open Postman and set on body tap
+            - raw
+            - JSON dialect
+        3. Run the application and make sure Tomcat is running on port: 8080
+        4. Put a few pieces of bread,meats, ingredients, and sauces in the database ( you can follow the instruction written with comments on each method
+        5. To create the burger you need to build JSON object "Burger" with its constructor, so you can put whatever ingredients you want.
+        6. Hit the /create endpoint and it will return your made burger with calculated price.
+        
+        And your burger is already in the base, so if you want to get it you can hit /get/burger/name endpoint and it will display it. 
+Built with Maven
+
+Dependencies:
+
+        - spring-boot-starter-data-jdbc
+        - spring-boot-starter-data-jpa
+        - spring-boot-starter-web
+        - spring-boot-devtools
+        - spring-boot-starter-test
+        - spring-restdocs-mockmvc
+        - mysql-connector-java
+        - hibernate-core
+About the files:
+
+I've created those packages and filled them: 
+   - controllers
+   - entities
+   - repositories
+   - services
+   
 The entities:
 
     - Bread
@@ -27,7 +53,7 @@ The entities:
     
 Each entity contains:
 
-    - ID
+    - id
     - name
     - price
     - Set<Burger> with @ManyToMany relation with @JoinTable // except Burger entity
@@ -138,8 +164,6 @@ Implementation of the Services with an added endpoint for every method.
         
 HomeController:
 
-I'm using it for burger creation. I named it "HomeController" because the starting point is on the main page when the frontend is added;
-
 There are 3 methods with endpoints inside which are BurgerService's methods
 
         @RequestMapping("/display")
@@ -156,24 +180,12 @@ There are 3 methods with endpoints inside which are BurgerService's methods
         public Burger createBurger(@RequestBody Burger burger){
             return this.burgerService.createBurger(burger);
         }
-
-To see how the application works you must have: XAMPP, etc. and Postman, etc.
-
-How to use it:
         
-        1. Run XAMPP and start MySql
-        2. Open Postman and set on body tap
-            - raw
-            - JSON dialect
-        3. Run the application and make sure Tomcat is running on port: 8080
-        4. Put a few pieces of bread,meats, ingredients, and sauces in the database ( you can follow the instruction written with comments on each method
-        5. To create the burger you need to build JSON object "Burger" with its constructor, so you can put whatever ingredients you want.
-        6. Hit the /create endpoint and it will return your made burger with calculated price.
         
-        And your burger is already in the base, so if you want to get it you can hit /get/burger/name endpoint and it will display it. 
-    
+Author:
         
-_ Created by Iliyan Boyanov
+   - Iliyan Boyanov
+        
 
 
     

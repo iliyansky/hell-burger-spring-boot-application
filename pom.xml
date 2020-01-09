@@ -12,7 +12,7 @@
     <artifactId>hell-burger-spring-boot-application</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>hell-burger-spring-boot-application</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Project with Spring Boot</description>
 
     <properties>
         <java.version>11</java.version>
